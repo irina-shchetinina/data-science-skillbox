@@ -1,0 +1,43 @@
+----15.3----
+
+SELECT * FROM Students ORDER BY registration_date;
+
+
+SELECT name, duration, students_count, price FROM Courses WHERE students_count > 4 AND duration > 10 ORDER BY price DESC LIMIT 5;
+
+
+(SELECT name FROM Students ORDER BY age LIMIT 3) UNION (SELECT name FROM Teachers ORDER
+BY age DESC LIMIT 3) UNION (SELECT name FROM Courses ORDER BY duration DESC LIMIT 3);
+
+
+
+
+
+----15.4----
+
+SELECT AVG(age) FROM Teachers WHERE salary > 10000;
+
+
+SELECT SUM(price) FROM Courses WHERE type='DESIGN';
+
+
+SELECT SUM(duration * 60) FROM Courses WHERE type='PROGRAMMING';
+
+
+
+
+----15.6----
+
+SELECT Students.name, SUM(Courses.duration) FROM Students JOIN Subscriptions ON Students
+.id = Subscriptions.student_id JOIN Courses ON Subscriptions.course_id = Courses.id GROUP BY Students.name;
+
+
+SELECT T.name, AVG(St.age) as T_name FROM Teachers T JOIN Courses C ON T.id = C.teacher_id JOIN Subscriptions Sub ON C.id = Sub.course_id JOIN Students St ON St.id = Sub.student_id GROUP BY T.name;
+
+
+
+SELECT Courses.type, AVG(Teachers.salary) FROM Courses JOIN Teachers ON Courses.teacher_id = Teachers.id GROUP BY Courses.type;
+
+
+
+
